@@ -3,21 +3,21 @@
     <span class="guide_item" :class="{on : $route.path=='/homepage'}"
           @click="goto('/homepage')" >
       <span class="item_icon">
-        <i class="iconfont icon-waimai"></i>
+        <i class="iconfont icon-wxbmingxingdianpu"></i>
       </span>
       <span>首页</span>
     </span>
-    <span class="guide_item" :class="{on : $route.path=='/classafiy'}"
+    <span class="guide_item" :class="{on : ($route.path=='/classafiy/sort')||($route.path=='/classafiy/brand')}"
           @click="goto('/classafiy')" >
       <span class="item_icon">
-        <i class="iconfont icon-waimai"></i>
+        <i class="iconfont icon-icon04"></i>
       </span>
       <span>分类</span>
     </span>
     <span class="guide_item" :class="{on : $route.path=='/shopcart'}"
           @click="goto('/shopcart')" >
       <span class="item_icon">
-        <i class="iconfont icon-waimai"></i>
+        <i class="iconfont icon-gouwuche"></i>
       </span>
 
       <span>购物车</span>
@@ -25,7 +25,7 @@
     <span class="guide_item" :class="{on : $route.path=='/myshop'}"
           @click="goto('/myshop')" >
       <span class="item_icon">
-        <i class="iconfont icon-waimai"></i>
+        <i class="iconfont icon-xiaolian"></i>
       </span>
       <span>我的e宠</span>
     </span>
