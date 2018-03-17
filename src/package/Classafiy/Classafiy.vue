@@ -8,7 +8,9 @@
           <router-link to="/classafiy/brand" replace>品牌</router-link>
         </div>
       </header>
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </div>
 </template>
 

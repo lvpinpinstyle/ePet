@@ -4,6 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Split from './components/Split/Split.vue'
+import './mock/MockServer'
+import store from './store'
+import VueLazyload from 'vue-lazyload'
+import loading from './common/images/loading.gif'
+
+Vue.use(VueLazyload, {
+  loading,
+})
 
 Vue.component('Split', Split)
 
@@ -12,5 +20,6 @@ new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  router
+  router,
+  store
 })

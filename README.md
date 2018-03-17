@@ -1,21 +1,7 @@
-# gshop
+day01
+ 首页基本完成，遇见的问题都不大，基本都能够解决，经常烦的错误就是选择器名字会写错
+ 首页广告部分需要注意一下，点击高度塌陷的问题
+ 轮播选择器的名字问题，选择器最好从上一层查找，以免几个swiper实例发生冲突
+ day02
+ 静态页面基本已经写完，需要注意的是布局问题，因为后期会有一些数据交互，要考虑交互问题
 
-> A Vue.js project
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

@@ -1,40 +1,43 @@
 <template>
     <div class="cart">
-      <LoginHeader :title="title">
-        <span class="cartback" slot="back">
+      <LoginHeader :title="title" style="border-bottom:1px solid #f3f3f3;">
+        <span class="cartback" slot="back" @click="$router.back()">
           <i class="iconfont icon-fanhui"></i>
         </span>
         <span class="cartmenu" slot="menu">
-          <i class="iconfont icon-icon-test" style="font-size:20px"></i>
+          <i class="iconfont icon-icon-test" @click="switchHide"></i>
         </span>
       </LoginHeader>
-      <div class="hidelist">
-        <div class="hideitem">
+      <!--<transition name="fade">-->
+        <HideList ref="hide"></HideList>
+        <!--<div class="hidelist" v-if="hideList">
+          <div class="hideitem">
           <span class="hideicon">
             <i class="iconfont icon-shouye"></i>
           </span>
-          <p class="hidetitle">首页</p>
-        </div>
-        <div class="hideitem">
+            <p class="hidetitle">首页</p>
+          </div>
+          <div class="hideitem">
           <span class="hideicon">
             <i class="iconfont icon-wenjianliebiao"></i>
           </span>
-          <p class="hidetitle">商品分类</p>
-        </div>
-        <div class="hideitem">
+            <p class="hidetitle">商品分类</p>
+          </div>
+          <div class="hideitem">
           <span class="hideicon" style="margin-left:15px ">
             <i class="iconfont icon-unie62d"></i>
             <span class="cartcount">0</span>
           </span>
-          <p class="hidetitle">购物车</p>
-        </div>
-        <div class="hideitem">
+            <p class="hidetitle">购物车</p>
+          </div>
+          <div class="hideitem">
           <span class="hideicon">
             <i class="iconfont icon-gerenzhongxin"></i>
           </span>
-          <p class="hidetitle">我的e宠</p>
-        </div>
-      </div>
+            <p class="hidetitle">我的e宠</p>
+          </div>
+        </div>-->
+      <!--</transition>-->
       <div class="cartbottom">
         <div class="cartimage">
           <span class="cartlogo">
@@ -43,7 +46,7 @@
         </div>
         <p class="cartempty">购物车是空的</p>
         <div class="cartfooter">
-          <span class="hanging">去逛逛</span>
+          <span class="hanging" @click="$router.push('/homepage')">去逛逛</span>
           <span class="collect">我的收藏</span>
         </div>
       </div>
@@ -52,18 +55,28 @@
 
 <script>
   import LoginHeader from '../../components/LoginHeader/LoginHeader.vue'
+  import HideList from '../../components/HideList/HideList.vue'
+
     export default {
       data(){
         return{
-          title:'购物车'
+          title:'购物车',
+          hideList:false,
+        }
+      },
+      methods:{
+        switchHide(){
+          this.$refs.hide.hideList=!this.$refs.hide.hideList
+          /*this.hideList=!this.hideList*/
         }
       },
       components:{
-        LoginHeader
+        LoginHeader,
+        HideList
       }
     }
 </script>
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
   .cart
     width 100%
     background #fff
@@ -80,11 +93,17 @@
           display inline-block
           width 82%
           font-size 18px
-    .hidelist
+   /* .hidelist
       width 100%
       overflow hidden
       border-bottom 1px solid #d7d7d7
-      padding 20px 0
+      line-height 50px
+      height 87px
+      !*padding 20px 0*!
+      &.fade-enter-active, &.fade-leave-active
+        transition 1s all
+      &.fade-enter, &.fade-leave-to
+        height 0
       .hideitem
         float left
         width 25%
@@ -111,7 +130,7 @@
             left -14px
         .hidetitle
           line-height 20px
-          font-size 14px
+          font-size 14px*/
     .cartbottom
       width 100%
       .cartimage

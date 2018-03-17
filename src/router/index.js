@@ -7,6 +7,7 @@ import ShopCart from '../package/ShopCart/ShopCart.vue'
 import MyShop from '../package/MyShop/MyShop.vue'
 import Sort from '../package/Classafiy/Sort/Sort.vue'
 import Brand from '../package/Classafiy/Brand/Brand.vue'
+import AllMenu from '../package/AllMenu/AllMenu.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,10 @@ export default new VueRouter({
     {
       path: '/shopcart',
       component:ShopCart
+    },
+    {
+      path: '/allmenu',
+      component:AllMenu
     },
     {
       path: '/myshop',
