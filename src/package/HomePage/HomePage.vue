@@ -275,9 +275,9 @@
               </div>-->
             </div>
             <!-- Add Pagination -->
-
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
+
         </div>
         <div class="dapai">
           <img v-lazy="homepage.haohuo">
@@ -658,6 +658,15 @@
                   >img
                     width 100%
                     height 100%
+            .swiper-pagination
+              .swiper-pagination-bullet-active
+                display inline-block
+                width 15px
+                height 6px
+                background #fff
+                border-radius 3px
+              .swiper-pagination-bullet
+                background #fff
         .dapai
           width 100%
           img

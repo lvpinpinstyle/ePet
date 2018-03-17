@@ -42,7 +42,7 @@
             <span class="icon">
               <i class="iconfont icon-ren"></i>
             </span>
-            <input type="text" class="write" placeholder="已注册的手机号" v-model="phone">
+            <input type="text" class="write" maxlength="11" placeholder="已注册的手机号" v-model="phone">
           </div>
           <div class="pwd">
             <span class="icon">
@@ -58,7 +58,8 @@
               <i class="iconfont icon-icon-"></i>
             </span>
             <input type="password" class="write" placeholder="动态密码"  v-model="captcha">
-            <div class="rcaptcha">获取动态密码</div>
+            <div class="rcaptcha" @click="getCode" v-if="!computeTime">获取动态密码</div>
+            <div class="verification" v-if="computeTime">还剩{{computeTime}}s</div>
           </div>
         </div>
       </div>
@@ -80,6 +81,7 @@
 <script>
   import LoginHeader from '../../components/LoginHeader/LoginHeader.vue'
   import AlertTip from '../../components/AlertTip/AlertTip.vue'
+  import {nameLogin,reqSendCode,reqSmsLogin} from '../../api/index'
 
   export default {
     data(){
@@ -88,6 +90,7 @@
         name:'',
         pwd:'',
         imageContent:'',
+        computeTime:0,
         phone:'',
         captcha:'',
         alertText: '',
@@ -100,6 +103,25 @@
       }
     },
     methods:{
+      async getCode(){
+        if(this.rightPhone){
+          this.computeTime=60
+          const intervalId=setInterval(()=>{
+            this.computeTime--
+            if(this.computeTime===0){
+              clearInterval(intervalId)
+            }
+          },1000)
+        }
+        // 发ajax请求, 向手机号发验证码
+        const result = await reqSendCode(this.phone)
+        if (result.code === 1) {
+          clearInterval(intervalId)
+          // 显示提示框
+          this.alertShow = true
+          this.alertText = result.msg
+        }
+      },
       switchLoginWay(isShow){
         this.loginWay=isShow
       },
@@ -124,7 +146,7 @@
           }
           result = await nameLogin({name, pwd})
         }else{
-          const {rightPhone, phone, imageContent,captcha} = this
+          const {rightPhone, phone,captcha} = this
           if(!rightPhone) { // 手机号
             this.alertShow = true
             this.alertText = '请输入正确的手机号'
@@ -134,7 +156,7 @@
             this.alertText = '请输入正确的验证码'
             return
           }
-         result = await phoneLogin({phone, captcha})
+         result = await reqSmsLogin({phone,code:captcha})
         }
         if(result.code===0) {
           // 得到用户信息
@@ -145,6 +167,7 @@
           this.$router.back()
         } else {
           this.alertShow = true
+
           this.alertText = result.msg
         }
       },
@@ -156,7 +179,6 @@
   }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
   .shopcart
     width 100%
     background #fff
@@ -241,6 +263,11 @@
             font-size 12px
             line-height 29px
 
+          .verification
+            float right
+            color #ccc
+            font-size 14px
+            background transparent
 
 
 
