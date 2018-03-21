@@ -534,6 +534,7 @@
               border-radius 3px
         .banner_combine
           width 100%
+          margin-top -2px
           .dog
             width 100%
             display block
